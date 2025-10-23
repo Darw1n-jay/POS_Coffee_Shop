@@ -1,28 +1,3 @@
-/*
-Java POS Coffee Shop System (single-file implementation)
-Features:
-- SQLite (jdbc:sqlite:pos.db)
-- Login / Logout
-- Admin and Cashier roles
-- Admin: manage products (add/update/delete/change price), view inventory, view sales, void/cancel transactions, create new users (admin or cashier)
-- Cashier: perform sales (create/update/delete), view inventory and sales (read-only), but limited in management actions
-
-Requirements:
-- Java 8+
-- sqlite-jdbc driver on classpath (e.g., sqlite-jdbc-3.41.2.1.jar or similar)
-
-How to compile & run:
-1. Place this file as Java_POS_CoffeeShop.java
-2. Download sqlite-jdbc jar and place in same folder or add to classpath.
-3. Compile:
-   javac -cp .:sqlite-jdbc-<version>.jar Java_POS_CoffeeShop.java
-4. Run:
-   java -cp .:sqlite-jdbc-<version>.jar Java_POS_CoffeeShop
-
-Note: On Windows, replace ':' with ';' in classpath.
-
-Security note: This example stores plaintext passwords for simplicity. For production, use password hashing (bcrypt) and proper input validation.
-*/
 
 import java.sql.*;
 import java.util.*;
