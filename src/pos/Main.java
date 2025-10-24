@@ -19,7 +19,7 @@ public class Main {
 
     private static void showWelcome() {
         System.out.println("====================================");
-        System.out.println("  Java POS - Coffee Shop (SQLite)");
+        System.out.println("       Java POS - Coffee Shop ");
         System.out.println("====================================");
     }
 
@@ -41,7 +41,7 @@ public class Main {
         }
     }
 
-    // --- Login/Register ---
+    
     private static void login() {
         System.out.print("Username: ");
         String u = scanner.nextLine().trim();
@@ -69,7 +69,7 @@ public class Main {
         System.out.println("Logged out.");
     }
 
-    // --- Menus ---
+    
     private static void adminMenu() {
         System.out.println("\n--- Admin Menu ---");
         System.out.println("1) Manage Products\n2) View Inventory\n3) Manage Sales\n4) Manage Users\n5) Logout");
@@ -97,7 +97,7 @@ public class Main {
         }
     }
 
-    // --- Product Management ---
+    
     private static void productManagement() {
         System.out.println("\n1) Add Product\n2) Update Product\n3) Delete Product\n4) List\n5) Back");
         System.out.print("Choose: ");
@@ -147,7 +147,7 @@ public class Main {
             System.out.printf("%3d %-15s %8.2f %5d\n", p.id, p.name, p.price, p.stock);
     }
 
-    // --- Sales ---
+    
     private static void createSale() {
         List<SaleItem> items = new ArrayList<>();
         while (true) {
@@ -179,7 +179,7 @@ public class Main {
             System.out.printf("%3d User:%d %.2f %s\n", s.id, s.userId, s.total, s.status);
     }
 
-    // --- Users ---
+    
     private static void manageUsers() {
         System.out.println("\n1) Add User\n2) List Users\n3) Back");
         switch (scanner.nextLine().trim()) {
