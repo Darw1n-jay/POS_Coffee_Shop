@@ -54,24 +54,5 @@ public class ProductDAO {
             ps.executeUpdate();
         } catch (SQLException e) { e.printStackTrace(); }
     }
-
-    public static int count(Connection conn) throws SQLException {
-        try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM products")) {
-            return rs.next() ? rs.getInt(1) : 0;
-        }
-    }
-
-    public static void insertSample(Connection conn) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO products (name,price,stock) VALUES (?,?,?)")) {
-            String[] names = {"Espresso","Americano","Latte","Cappuccino","Mocha"};
-            double[] prices = {80,90,120,120,130};
-            int[] stocks = {50,50,50,50,50};
-            for (int i = 0; i < names.length; i++) {
-                ps.setString(1, names[i]);
-                ps.setDouble(2, prices[i]);
-                ps.setInt(3, stocks[i]);
-                ps.executeUpdate();
-            }
-        }
-    }
 }
+    

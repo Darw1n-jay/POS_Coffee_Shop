@@ -2,6 +2,7 @@ package pos.dao;
 
 import pos.config.DB;
 import pos.model.User;
+import pos.util.PasswordUtil;
 import java.sql.*;
 import java.util.*;
 
@@ -27,7 +28,7 @@ public class UserDAO {
         try (Connection conn = DB.connect();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO users (username,password,role) VALUES (?,?,?)")) {
             ps.setString(1, u.username);
-            ps.setString(2, u.password);
+            ps.setString(2, PasswordUtil.hash(u.password));
             ps.setString(3, u.role);
             ps.executeUpdate();
         } catch (SQLException e) { e.printStackTrace(); }
@@ -50,10 +51,9 @@ public class UserDAO {
         return list;
     }
 
-    public static int countAdmins(Connection conn) throws SQLException {
-        try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM users WHERE role='ADMIN'")) {
-            return rs.next() ? rs.getInt(1) : 0;
-        }
+    public static boolean verify(String username, String password) {
+        User user = getByUsername(username);
+        if (user == null) return false;
+        return user.password.equals(PasswordUtil.hash(password));
     }
 }

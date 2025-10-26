@@ -3,7 +3,6 @@ package pos;
 import pos.config.DB;
 import pos.model.*;
 import pos.dao.*;
-
 import java.util.*;
 import java.time.*;
 
@@ -41,16 +40,14 @@ public class Main {
         }
     }
 
-    
     private static void login() {
         System.out.print("Username: ");
         String u = scanner.nextLine().trim();
         System.out.print("Password: ");
         String p = scanner.nextLine().trim();
-        User user = UserDAO.getByUsername(u);
-        if (user != null && user.password.equals(p)) {
-            currentUser = user;
-            System.out.println("Logged in as " + user.username + " (" + user.role + ")");
+        if (UserDAO.verify(u, p)) {
+            currentUser = UserDAO.getByUsername(u);
+            System.out.println("Logged in as " + currentUser.username + " (" + currentUser.role + ")");
         } else System.out.println("Invalid credentials");
     }
 
@@ -61,7 +58,7 @@ public class Main {
         System.out.print("Password: ");
         String p = scanner.nextLine().trim();
         UserDAO.insert(new User(u, p, "CASHIER"));
-        System.out.println("Cashier registered!");
+        System.out.println("Cashier registered.");
     }
 
     private static void logout() {
@@ -69,7 +66,6 @@ public class Main {
         System.out.println("Logged out.");
     }
 
-    
     private static void adminMenu() {
         System.out.println("\n--- Admin Menu ---");
         System.out.println("1) Manage Products\n2) View Inventory\n3) Manage Sales\n4) Manage Users\n5) Logout");
@@ -97,7 +93,6 @@ public class Main {
         }
     }
 
-    
     private static void productManagement() {
         System.out.println("\n1) Add Product\n2) Update Product\n3) Delete Product\n4) List\n5) Back");
         System.out.print("Choose: ");
@@ -147,7 +142,6 @@ public class Main {
             System.out.printf("%3d %-15s %8.2f %5d\n", p.id, p.name, p.price, p.stock);
     }
 
-    
     private static void createSale() {
         List<SaleItem> items = new ArrayList<>();
         while (true) {
@@ -179,7 +173,6 @@ public class Main {
             System.out.printf("%3d User:%d %.2f %s\n", s.id, s.userId, s.total, s.status);
     }
 
-    
     private static void manageUsers() {
         System.out.println("\n1) Add User\n2) List Users\n3) Back");
         switch (scanner.nextLine().trim()) {
